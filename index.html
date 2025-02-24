@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>صلاتي</title>
+
+    <!-- Icon -->
+    <link rel="icon" href="./public/icons/mosque.png" />
+
+    <!-- Tailwind CSS CDN [Comment it in Production] -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./public/styles/background.css" />
+
+    <!-- Tajawal font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="sm:my-10 bg-cover bg-center w-full h-screen font-[tajawal] text-right"
+  >
+    <main
+      class="container flex flex-col gap-y-5 items-center justify-center h-full"
+    >
+      <h1 class="sm:text-6xl text-5xl font-bold">صلاتي</h1>
+      <p class="sm:text-lg text-xs font-medium">
+        دليلك الدقيق لمواقيت الصلاة، دائمًا في الوقت المناسب
+      </p>
+      <!-- This section will be hidden at first, then using JS we will show it. -->
+      <section
+        id="prayer-grid"
+        class="hidden grid-cols-2 gap-x-10 gap-y-5 grid-rows-7 text-center text-white bg-blue-500/15 p-3 rounded-xl"
+      >
+        <p
+          class="sm:px-18 hover:bg-green-400 font-bold py-2 px-7 border-2 border-white rounded-xl bg-blue-400"
+        >
+          الموعد
+        </p>
+        <p
+          class="sm:px-18 hover:bg-green-400 font-bold py-2 px-7 border-2 border-white rounded-xl bg-blue-400"
+        >
+          الصلاة
+        </p>
+        <p
+          id="prayer-1"
+          class="sm:px-18 hover:bg-red-400 py-2 px-7 border-2 border-white rounded-xl bg-blue-400"
+        >
+          -
+        </p>
+        <p
+          class="sm:px-18 hover:bg-red-400 py-2 px-7 border-2 border-white rounded-xl bg-blue-400"
+        >
+          الفجر
+        </p>
+        <p
+          id="prayer-2"
+          class="sm:px-18 hover:bg-red-400 py-2 px-7 border-2 border-white rounded-xl bg-blue-400"
+        >
+          -
+        </p>
+        <p
+          class="sm:px-18 hover:bg-red-400 py-2 px-7 border-2 border-white rounded-xl bg-blue-400"
+        >
+          الشروق
+        </p>
+        <p
+          id="prayer-3"
+          class="sm:px-18 hover:bg-red-400 py-2 px-7 border-2 border-white rounded-xl bg-blue-400"
+        >
+          -
+        </p>
+        <p
+          class="sm:px-18 hover:bg-red-400 py-2 px-7 border-2 border-white rounded-xl bg-blue-400"
+        >
+          الظهر
+        </p>
+        <p
+          id="prayer-4"
+          class="sm:px-18 hover:bg-red-400 py-2 px-7 border-2 border-white rounded-xl bg-blue-400"
+        >
+          -
+        </p>
+        <p
+          class="sm:px-18 hover:bg-red-400 py-2 px-7 border-2 border-white rounded-xl bg-blue-400"
+        >
+          العصر
+        </p>
+        <p
+          id="prayer-5"
+          class="sm:px-18 hover:bg-red-400 py-2 px-7 border-2 border-white rounded-xl bg-blue-400"
+        >
+          -
+        </p>
+        <p
+          class="sm:px-18 hover:bg-red-400 py-2 px-7 border-2 border-white rounded-xl bg-blue-400"
+        >
+          المغرب
+        </p>
+        <p
+          id="prayer-6"
+          class="sm:px-18 hover:bg-red-400 py-2 px-7 border-2 border-white rounded-xl bg-blue-400"
+        >
+          -
+        </p>
+        <p
+          class="sm:px-18 hover:bg-red-400 py-2 px-7 border-2 border-white rounded-xl bg-blue-400"
+        >
+          العشاء
+        </p>
+      </section>
+      <button
+        class="hover:bg-green-400 hover:py-3 hover:px-10 hover:text-lg font-bold py-2 px-8 border-2 border-white rounded-xl bg-blue-400 text-white transition-all duration-200"
+      >
+        إستعلام
+      </button>
+    </main>
+  </body>
+  <script src="./src/prayerTimeFetch.js"></script>
+  <script src="./src/displayResults.js"></script>
+  <script src="./src/locationFetch.js"></script>
+  <script src="./src/fetchIP.js"></script>
+  <script src="./src/index.js"></script>
+</html>
