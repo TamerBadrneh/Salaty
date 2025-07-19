@@ -72,3 +72,6 @@ function awakeClock() {
 
 awakeClock();
 fetchPrayerTimes("عمّان");
+$("#copyrights").html(
+  `&copy; ${new Date().getFullYear()} تامر بدرانه، جميع الحقوق محفوظة.`
+);
