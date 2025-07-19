@@ -28,39 +28,66 @@
 
     <!-- Styles -->
     <style>
-      * {
-        font-family: "IBM Plex Sans Arabic";
-        direction: rtl;
-        background-color: #44126f;
-        color: white;
-      }
-
       body {
+        direction: rtl !important;
         width: 75% !important;
         margin-inline: auto;
+        background: linear-gradient(135deg, #e9e4f0 0%, #c7b8e0 100%);
+        color: #2d2350;
+      }
+
+      header,
+      footer {
+        background: transparent;
+        color: #2d2350;
+      }
+
+      .table-responsive {
+        background: transparent;
+      }
+
+      .table {
+        background-color: #fff !important;
+        color: #2d2350 !important;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(68, 18, 111, 0.08);
+        overflow: hidden;
+      }
+
+      .table th {
+        background-color: #a084ca !important;
+        color: #fff !important;
+        font-weight: 600;
+        border: none;
+      }
+
+      .table td {
+        background-color: #f3f0fa !important;
+        color: #2d2350 !important;
+        border: none;
       }
 
       option {
-        background-color: white;
-        color: black;
+        background-color: #fff;
+        color: #2d2350;
       }
 
       .btn-primary {
-        color: #44126f;
-        background-color: white;
-        border-color: #44126f;
+        color: #fff !important;
+        background-color: #a084ca !important;
+        border-color: #a084ca !important;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: background 0.2s;
       }
 
-      .btn-primary:hover {
-        color: white;
-        background-color: #751dc2;
-        border-color: #ffffff;
-      }
-
-      .btn.btn-primary:active {
-        background-color: #751dc2 !important;
-        color: white !important;
-        border-color: #ffffff !important;
+      .btn-primary:hover,
+      .btn-primary:focus,
+      .btn.btn-primary:active,
+      .btn.btn-primary.active {
+        background-color: #5a189a !important;
+        border-color: #5a189a !important;
+        color: #fff !important;
       }
     </style>
   </head>
@@ -83,65 +110,59 @@
           <div class="col-lg-6">
             <h1 class="display-5 fw-bold lh-1 mb-3">صلاتي</h1>
             <p class="lead">دليلك اليومي لمواقيت الصلاة بدقة وسهولة</p>
+            <p class="lead">الساعة الان : <span id="clock"></span></p>
           </div>
         </div>
       </header>
 
       <!-- Form -->
-      <form class="d-flex gap-3">
-        <select class="form-select">
-          <option selected>عمّان</option>
-          <option>إربد</option>
-          <option>الزرقاء</option>
-          <option>البلقاء</option>
-          <option>المفرق</option>
-          <option>الكرك</option>
-          <option>الطفيلة</option>
-          <option>معان</option>
-          <option>العقبة</option>
-          <option>جرش</option>
-          <option>مادبا</option>
-          <option>عجلون</option>
+      <form id="location-form" class="d-flex gap-3">
+        <select id="select-input" class="form-select">
+          <option value="عمّان" selected>عمّان</option>
+          <option value="إربد">إربد</option>
+          <option value="الزرقاء">الزرقاء</option>
+          <option value="البلقاء">البلقاء</option>
+          <option value="المفرق">المفرق</option>
+          <option value="الكرك">الكرك</option>
+          <option value="الطفيلة">الطفيلة</option>
+          <option value="معان">معان</option>
+          <option value="العقبة">العقبة</option>
+          <option value="جرش">جرش</option>
+          <option value="مادبا">مادبا</option>
+          <option value="عجلون">عجلون</option>
         </select>
         <button class="btn btn-primary" type="submit">استعلام</button>
       </form>
 
       <!-- Results -->
-      <section>
-        <article class="d-flex justify-content-around text-center">
-          <p>الصلاة</p>
-          <p>الموعد</p>
-        </article>
-        <article class="d-flex justify-content-around text-center">
-          <p>الفجر</p>
-          <p>10:00 AM</p>
-        </article>
-        <article class="d-flex justify-content-around text-center">
-          <p>الشروق</p>
-          <p>10:00 AM</p>
-        </article>
-        <article class="d-flex justify-content-around text-center">
-          <p>الظهر</p>
-          <p>10:00 AM</p>
-        </article>
-        <article class="d-flex justify-content-around text-center">
-          <p>العصر</p>
-          <p>10:00 AM</p>
-        </article>
-        <article class="d-flex justify-content-around text-center">
-          <p>المغرب</p>
-          <p>10:00 AM</p>
-        </article>
-        <article class="d-flex justify-content-around text-center">
-          <p>العشاء</p>
-          <p>10:00 AM</p>
-        </article>
+      <section id="prayer-times" class="my-4">
+        <div class="table-responsive">
+          <table
+            class="table table-bordered text-center align-middle"
+            style="background-color: #44126f; color: white"
+          >
+            <thead>
+              <tr>
+                <th scope="col">الصلاة</th>
+                <th scope="col">الموعد</th>
+              </tr>
+            </thead>
+            <tbody id="prayer-times">
+              <tr id="Fajr"></tr>
+              <tr id="Sunrise"></tr>
+              <tr id="Dhuhr"></tr>
+              <tr id="Asr"></tr>
+              <tr id="Maghrib"></tr>
+              <tr id="Isha"></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <!-- Footer -->
       <footer class="text-center my-4">
         <p>&copy; 2025 تامر بدرانه، جميع الحقوق محفوظة.</p>
-        <p class="text-info">
+        <p class="text-dark">
           تم تطوير هذا التطبيق لتسهيل معرفة مواقيت الصلاة بدقة وسهولة، باستخدام
           أحدث التقنيات وواجهة برمجة التطبيقات Aladhan لجلب البيانات بشكل موثوق.
         </p>
@@ -163,6 +184,9 @@
     integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
     crossorigin="anonymous"
   ></script>
+
+  <!-- 3. Axios.js -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   <!-- main -->
   <script src="./main.js"></script>
