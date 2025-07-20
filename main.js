@@ -7,7 +7,7 @@ const governates = {
   المفرق: { lat: 32.3422, lon: 36.2026 },
   جرش: { lat: 32.2769, lon: 35.8992 },
   عجلون: { lat: 32.3331, lon: 35.7522 },
-  مأدبا: { lat: 31.7167, lon: 35.8 },
+  مادبا: { lat: 31.7167, lon: 35.8 },
   الكرك: { lat: 31.18, lon: 35.7 },
   الطفيلة: { lat: 30.8333, lon: 35.6167 },
   معان: { lat: 30.1944, lon: 35.7372 },
@@ -22,16 +22,16 @@ $("#location-form").on("submit", (event) => {
 });
 
 // API Call Logic
-function fetchPrayerTimes(location) {
+async function fetchPrayerTimes(location) {
   let day = new Date().getDate();
   let month = new Date().getMonth() + 1;
   let year = new Date().getFullYear();
 
-  axios
-    .get(
-      `https://api.aladhan.com/v1/timings/${day}-${month}-${year}?latitude=${governates[location].lat}&longitude=${governates[location].lon}&method=23&timezone=Asia/Amman`
-    )
-    .then((response) => renderPrayerTimes(response.data.data.timings));
+  let response = await axios.get(
+    `https://api.aladhan.com/v1/timings/${day}-${month}-${year}?latitude=${governates[location].lat}&longitude=${governates[location].lon}&method=23&timezone=Asia/Amman`
+  );
+
+  renderPrayerTimes(response.data.data.timings);
 }
 
 function renderPrayerTimes(prayerTimes) {
@@ -62,10 +62,16 @@ function translatePrayerTime(englishPrayerTime) {
 function awakeClock() {
   setInterval(() => {
     let date = new Date();
+
+    const options = {
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+      hour12: true,
+    };
+
     $("#clock").html(
-      `${date.getHours() - 12}:${date.getMinutes()}:${date.getSeconds()} ${
-        date.getHours() < 12 ? "AM" : "PM"
-      }`
+      `${new Intl.DateTimeFormat("default", options).format(date)}`
     );
   }, 100);
 }
